@@ -1,42 +1,48 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace Texte1VerificacaoIdade
+using System;
+using System.Globalization;
+
+namespace MeuProjeto
 {
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
-        {   int diaNascimento;
-            int mesNascimento;
-            int anoNascimento;
-            int diaAtual;
-            int mesAtual;
-            int anoAtual;
+        {
+            // Data de nascimento da pessoa (exemplo)
+            DateTime dataDeNascimento = new DateTime();
 
+            // Obtendo a data e hora atual
+            DateTime agora = DateTime.Now;
 
-            //Console.WriteLine(anoAtual - anoNascimento); Esse seria o código inicialmente.
-            Console.WriteLine("Digite o dia, do seu nascimento!");
-            diaNascimento = Convert.ToInt32( Console.ReadLine());
+            // Calculando a idade
+            int idade = agora.Year - dataDeNascimento.Year;
+            String dataTela = Console.ReadLine();
+            DateTime dataNascimento = DateTime.Now;
+            try
+            {
+                dataNascimento = DateTime.ParseExact(dataTela, "dd/MM/yyyy",
+                                           CultureInfo.InvariantCulture);
+            }
+            catch(System.FormatException)
+            {
+                Console.WriteLine("Data Inválida. Use o formato dd/mm/yyyy.");
+                return;
+            }
+            // Verificando se já passou o aniversário deste ano
+            //if (agora.Month < dataDeNascimento.Month || (agora.Month == dataDeNascimento.Month && agora.Day < dataDeNascimento.Day))
+            if (dataNascimento.CompareTo(agora) > 0)
+            {
+                Console.WriteLine("Você ainda não nasceu!");
+                return;
+               
+            }
 
-            Console.Write("Digite o més do seu Nascimento");
-            Console.WriteLine();
-            mesNascimento = Convert.ToInt32( Console.ReadLine());
+            // Exibindo a idade
+            Console.WriteLine("A idade é: " + idade);
 
-            Console.WriteLine("Digite o ano, do seu nascimento!");
-            Console.WriteLine();
-            anoNascimento = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Digite o dia atua");
-            Console.WriteLine();
-            diaAtual = Convert.ToInt32(Console.ReadLine());
-          
-            Console.WriteLine("Digite o més, Aatual!");
-            Console.WriteLine();
-            mesAtual = Convert.ToInt32(Console.ReadLine());
-
-            Console.WriteLine("Digite o Ano atual!");
-            Console.WriteLine();
-            anoAtual = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine();
-            Console.WriteLine(diaNascimento - diaAtual - mesNascimento - mesAtual - anoNascimento - anoAtual);
+            // Espera até que o usuário pressione uma tecla antes de fechar
+            Console.ReadKey();
         }
     }
 }
