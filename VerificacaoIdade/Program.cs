@@ -9,39 +9,36 @@ namespace MeuProjeto
     {
         static void Main(string[] args)
         {
-            // Data de nascimento da pessoa (exemplo)
-            DateTime dataDeNascimento = new DateTime();
-
-            // Obtendo a data e hora atual
-            DateTime agora = DateTime.Now;
-
-            // Calculando a idade
-            int idade = agora.Year - dataDeNascimento.Year;
+            Console.WriteLine("Digite o dia, més ano do seu nascimento");
             String dataTela = Console.ReadLine();
-            DateTime dataNascimento = DateTime.Now;
+            
+            DateTime dataNascimento;
+
             try
             {
-                dataNascimento = DateTime.ParseExact(dataTela, "dd/MM/yyyy",
-                                           CultureInfo.InvariantCulture);
+                dataNascimento = DateTime.ParseExact(dataTela, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             }
-            catch(System.FormatException)
+            catch(FormatException)
             {
                 Console.WriteLine("Data Inválida. Use o formato dd/mm/yyyy.");
                 return;
             }
-            // Verificando se já passou o aniversário deste ano
-            //if (agora.Month < dataDeNascimento.Month || (agora.Month == dataDeNascimento.Month && agora.Day < dataDeNascimento.Day))
-            if (dataNascimento.CompareTo(agora) > 0)
-            {
-                Console.WriteLine("Você ainda não nasceu!");
-                return;
-               
-            }
+            DateTime agora = DateTime.Now;
+            int idade = agora.Year - dataNascimento.Year;
+            
+            if (agora.Month < dataNascimento.Month || (agora.Month == dataNascimento.Month && agora.Day < dataNascimento.Day))
 
-            // Exibindo a idade
-            Console.WriteLine("A idade é: " + idade);
+           if (dataNascimento.CompareTo(agora) > 0)
+                {
+                    return;
+                    Console.WriteLine("Você ainda não nasceu!");
+                
+           }
+            Console.WriteLine("Sua idade é: " + idade + " anos");
 
-            // Espera até que o usuário pressione uma tecla antes de fechar
+           
+            
+         
             Console.ReadKey();
         }
     }
