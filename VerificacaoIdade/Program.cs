@@ -7,46 +7,38 @@ using System.ComponentModel.Design;
 
 namespace MeuProjeto
 {
+    using System;
+
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            Console.WriteLine("Digite o dia, més ano do seu nascimento");
-            String dataTela = Console.ReadLine();
-
-            DateTime dataNascimento;
-            
-
-            try
-            {
-                dataNascimento = DateTime.ParseExact(dataTela, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Data Inválida. Use o formato dd/MM/yyyy.");
-                return;
-            }
             DateTime agora = DateTime.Now;
+
+            Console.WriteLine("Digite o dia, mês e ano do seu nascimento (no formato DD/MM/AAAA):");
+            string input = Console.ReadLine();
+            DateTime dataNascimento = DateTime.ParseExact(input, "dd/MM/yyyy", null);
+
             int idade = agora.Year - dataNascimento.Year;
 
-            if (dataNascimento.CompareTo(agora) == 0)
+            // Verifica se o aniversário já passou este ano
+            if (dataNascimento.Date > agora.Date.AddYears(-idade))
+            {
+                idade--;
+            }
+
+            if (dataNascimento.Date == agora.Date)
             {
                 Console.WriteLine("Você nasceu hoje!");
             }
-            else if (dataNascimento.CompareTo(agora.Date) <= 0)
+            else if (dataNascimento.Date > agora.Date)
             {
-                Console.WriteLine("Você não nasceu!");   
+                Console.WriteLine("Você ainda não nasceu!");
             }
             else
             {
                 Console.WriteLine("Sua idade é: " + idade + " anos");
             }
-          
-
-
-
-
-
         }
     }
 }
