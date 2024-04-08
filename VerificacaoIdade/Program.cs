@@ -18,6 +18,7 @@ namespace MeuProjeto
             Console.WriteLine("Digite o dia, mês e ano do seu nascimento (no formato DD/MM/AAAA):");
             string input = Console.ReadLine();
             DateTime dataNascimento = DateTime.ParseExact(input, "dd/MM/yyyy", null);
+            TimeSpan intervaloTempo = agora.Subtract(dataNascimento);
 
             int idade = agora.Year - dataNascimento.Year;
 
@@ -38,6 +39,7 @@ namespace MeuProjeto
             else
             {
                 Console.WriteLine("Sua idade é: " + idade + " anos");
+
             }
         }
     }
